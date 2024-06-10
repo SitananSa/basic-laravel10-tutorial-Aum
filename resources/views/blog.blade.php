@@ -6,22 +6,29 @@
         <thead>
             <tr>
                 <th scope="col">ชื่อบทความ</th>
-                <th scope="col">เนื้อหา</th>
                 <th scope="col">สถานะ</th>
+                <th scope="col">ลบบทความ</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($blogs as $item)
                 <tr>
-                    <td>{{ $item['title'] }}</td>
-                    <td>{{ $item['content'] }}</td>
+                    <td>{{ $item->title }}</td>
+
                     <td>
-                        @if ($item['status'] == true)
-                            <a href="#" class="btn btn-success">เผยแพร่</a>
+                        @if ($item->status == true)
+                            <a href="{{route('change',$item->id)}}" class="btn btn-success">เผยแพร่</a>
                         @else
-                        <a href="#" class="btn btn-warning">ฉบับร่าง</a>
+                            <a href="{{route('change',$item->id)}}" class="btn btn-warning">ฉบับร่าง</a>
                         @endif
                     </td>
+                    <td><a
+                         href="{{route('delete',$item->id)}}" 
+                         class="btn btn-danger"
+                         onclick="return confirm('คุณต้องการลบบทความ {{$item->title}}หรือไม่ ?')"
+                         >ลบ
+                        
+                        </a></td>
                 </tr>
             @endforeach
         </tbody>
