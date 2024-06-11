@@ -8,6 +8,7 @@
                 <th scope="col">ชื่อบทความ</th>
                 <th scope="col">สถานะ</th>
                 <th scope="col">ลบบทความ</th>
+                <th scope="col">แก้ไข</th>
             </tr>
         </thead>
         <tbody>
@@ -17,17 +18,15 @@
 
                     <td>
                         @if ($item->status == true)
-                            <a href="{{route('change',$item->id)}}" class="btn btn-success">เผยแพร่</a>
+                            <a href="{{ route('change', $item->id) }}" class="btn btn-success">เผยแพร่</a>
                         @else
-                            <a href="{{route('change',$item->id)}}" class="btn btn-warning">ฉบับร่าง</a>
+                            <a href="{{ route('change', $item->id) }}" class="btn btn-secondary">ฉบับร่าง</a>
                         @endif
                     </td>
-                    <td><a
-                         href="{{route('delete',$item->id)}}" 
-                         class="btn btn-danger"
-                         onclick="return confirm('คุณต้องการลบบทความ {{$item->title}}หรือไม่ ?')"
-                         >ลบ
-                        
+                    <td><a href="{{route('edit',$item->id)}}" class="btn btn-warning">แก้ไข</a></td>
+                    <td><a href="{{ route('delete', $item->id) }}" class="btn btn-danger"
+                            onclick="return confirm('คุณต้องการลบบทความ {{ $item->title }}หรือไม่ ?')">ลบ
+
                         </a></td>
                 </tr>
             @endforeach

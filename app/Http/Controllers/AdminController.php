@@ -58,4 +58,30 @@ class AdminController extends Controller
         $blog=DB::table('blogs')->where('id',$id)->update($data);
         return redirect('/blog');
     }
+    function edit($id){
+        $blog=DB::table('blogs')->where('id',$id)->first();
+        return view('edit',compact('blog'));
+    }
+
+    function update(Request $request,$id){
+        $request->validate(
+            [
+
+            'title'=>'required|max:50',
+            'content'=>'required'
+            ],
+        [
+            'title.required'=>'กรุณาป้อนชื่อบทความ',
+            'title.max'=>'ชื่อบทความไม่ควรเกิน 50 ตัวอักษร',
+            'content.required'=>'กรุณาป้อนเนื้อหาบทความของคุณ'
+        ]
+        );
+        $data=[
+            'title'=>$request->title,
+            'content'=>$request->content
+        ];
+       DB::table('blogs')->where('id',$id)->update($data);
+       return redirect('/blog');
+    }
 }
+
