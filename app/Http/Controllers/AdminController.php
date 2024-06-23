@@ -10,8 +10,12 @@ use function PHPUnit\Framework\returnSelf;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function index(){
-        $blogs=DB::table('blogs')->get();
+        $blogs=DB::table('blogs')->paginate(5);
         return view('blog',compact('blogs'));
     
     }

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 @section('title', 'แก้ไขบทความ')
 @section('content')
     <h2 class="text-center py-2">แก้ไขบทความ</h2>
